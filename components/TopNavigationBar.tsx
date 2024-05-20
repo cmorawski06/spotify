@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 0,
     padding: 15
   },
   iconContainer: {

@@ -35,7 +35,7 @@ const RecentlyPlayed: React.FC = () => {
                             source={{ uri: 'https://static.independent.co.uk/2023/11/29/15/LOCKUP-LAVENDER.jpg?width=1200&height=1200&fit=crop' }} // Podaj odpowiedni link do obrazu
                             style={styles.image}
                         />
-                        <Text style={styles.text}>Twoje Wrapped</Text>
+                        <Text style={styles.text}>Wrapped</Text>
                     </View>
                 </View>
             </View>

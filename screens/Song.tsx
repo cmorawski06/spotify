@@ -1,14 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Audio } from 'expo-av';
 
 const Song: React.FC = () => {
     const [isPlaying, setIsPlaying] = useState(true);
+    const [sound, setSound] = useState<Audio.Sound | null>(null);
+    const [duration, setDuration] = useState<number>(0);
+    const [position, setPosition] = useState<number>(0);
+    const [isSeeking, setIsSeeking] = useState<boolean>(false);
+    const [currentTime, setCurrentTime] = useState<number>(0);
 
-    const handlePlayPausePress = () => {
-        setIsPlaying(!isPlaying);
+    useEffect(() => {
+        const loadSound = async () => {
+            const { sound, status } = await Audio.Sound.createAsync(
+                require('../MOBBYN - HARRY POTHED.mp3')
+            );
+            setSound(sound);
+            sound.playAsync();
+            setDuration(status.durationMillis || 0);
+            sound.setOnPlaybackStatusUpdate((status) => {
+                if (status.isPlaying) {
+                    setPosition(status.positionMillis / status.durationMillis);
+                    setCurrentTime(status.positionMillis);
+                }
+            });
+        };
+
+        loadSound();
+
+        return () => {
+            if (sound) {
+                sound.unloadAsync();
+            }
+        };
+    }, []);
+
+    const handlePlayPausePress = async () => {
+        if (sound) {
+            if (isPlaying) {
+                await sound.pauseAsync();
+            } else {
+                await sound.playAsync();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
+    const handleSeek = async (value: number) => {
+        if (sound) {
+            await sound.setPositionAsync(value * duration);
+            setPosition(value);
+        }
+    };
+
+    const formatTime = (time: number): string => {
+        const minutes = Math.floor(time / 60000);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
     return (
@@ -48,10 +99,16 @@ const Song: React.FC = () => {
                             minimumTrackTintColor="#FFF"
                             maximumTrackTintColor="#AAA"
                             thumbTintColor="#FFF"
+                            value={position}
+                            onSlidingStart={() => setIsSeeking(true)}
+                            onSlidingComplete={(value) => {
+                                setIsSeeking(false);
+                                handleSeek(value);
+                            }}
                         />
                         <View style={styles.timeContainer}>
-                            <Text style={styles.timeText}>0:00</Text>
-                            <Text style={styles.timeText}>2:22</Text>
+                            <Text style={styles.timeText}>{formatTime(currentTime)}</Text>
+                            <Text style={styles.timeText}>{formatTime(duration)}</Text>
                         </View>
                     </View>
                     <View style={styles.controlsContainer}>
@@ -161,4 +218,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Song;
+export default Song
