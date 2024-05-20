@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Animated } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const NewRelease: React.FC = () => {
-    const [showAdditionalView, setShowAdditionalView] = useState(false); // Dodaj stan dla widoczności dodatkowego widoku
+    const navigation = useNavigation();
 
     const handleNewReleasePress = () => {
-        setShowAdditionalView(!showAdditionalView)
+        navigation.navigate("Song")
     };
 
     return (
@@ -34,10 +35,6 @@ const NewRelease: React.FC = () => {
                     </View>
                 </View>
             </TouchableOpacity>
-            {showAdditionalView && (
-                <View style={styles.play}>
-                </View>
-            )}
         </View>
     );
 };
@@ -94,6 +91,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flex: 1,
+        alignItems: 'flex-start', // Ustaw tekst na lewą stronę
     },
     iconContainer: {
         flexDirection: 'row',
@@ -110,8 +108,6 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         paddingTop: 12,
         paddingBottom: 12,
-        // borderBottomWidth: 4,
-        // borderBottomColor: '#5abc62',
         borderRadius: 5,
         backgroundColor: '#222',
         elevation: 6,

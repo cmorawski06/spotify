@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 const RecentlyPlayed: React.FC = () => {
     return (
@@ -9,22 +8,34 @@ const RecentlyPlayed: React.FC = () => {
             <View style={styles.songContainer}>
                 <View style={styles.column}>
                     <View style={[styles.tile, { backgroundColor: '#302c2c' }]}>
-                        <MaterialIcons name="music-note" size={24} style={styles.icon} />
-                        <Text style={styles.text}>Song 1</Text>
+                        <Image
+                            source={{ uri: 'https://pub-static.fotor.com/assets/projects/pages/c7d9749a29fc44a5a54da2bba21165af/gradient-cool-new-bullet-e52b9cac8825471981dc12dd343176da.jpg' }} // Podaj odpowiedni link do obrazu
+                            style={styles.image}
+                        />
+                        <Text style={styles.text}>Jazz</Text>
                     </View>
                     <View style={[styles.tile, { backgroundColor: '#302c2c' }]}>
-                        <MaterialIcons name="music-note" size={24} style={styles.icon} />
-                        <Text style={styles.text}>Song 2</Text>
+                        <Image
+                            source={{ uri: 'https://archive.org/download/spotify_202008/spotify.jpg' }} // Podaj odpowiedni link do obrazu
+                            style={styles.image}
+                        />
+                        <Text style={styles.text}>☠️☠️☠️</Text>
                     </View>
                 </View>
                 <View style={styles.column}>
                     <View style={[styles.tile, { backgroundColor: '#302c2c' }]}>
-                        <MaterialIcons name="music-note" size={24} style={styles.icon} />
-                        <Text style={styles.text}>Song 3</Text>
+                        <Image
+                            source={{ uri: 'https://cdn.dribbble.com/users/905938/screenshots/3441423/attachments/754775/cover-4.jpg?resize=400x300&vertical=center' }} // Podaj odpowiedni link do obrazu
+                            style={styles.image}
+                        />
+                        <Text style={styles.text}>Rap</Text>
                     </View>
                     <View style={[styles.tile, { backgroundColor: '#302c2c' }]}>
-                        <MaterialIcons name="music-note" size={24} style={styles.icon} />
-                        <Text style={styles.text}>Song 4</Text>
+                        <Image
+                            source={{ uri: 'https://static.independent.co.uk/2023/11/29/15/LOCKUP-LAVENDER.jpg?width=1200&height=1200&fit=crop' }} // Podaj odpowiedni link do obrazu
+                            style={styles.image}
+                        />
+                        <Text style={styles.text}>Twoje Wrapped</Text>
                     </View>
                 </View>
             </View>
@@ -56,9 +67,11 @@ const styles = StyleSheet.create({
         borderRadius: 8, // Opcjonalnie: Dodanie zaokrąglonych krawędzi dla kafelków
         flexGrow: 1, // Rozciągaj kafelki na maksymalną szerokość
     },
-    icon: {
+    image: {
+        width: 40, // Szerokość obrazu
+        height: 40, // Wysokość obrazu
         marginRight: 8,
-        color: '#FFF',
+        borderRadius: 5, // Opcjonalnie: Dodanie zaokrąglonych krawędzi dla obrazów
     },
     text: {
         fontSize: 24,
