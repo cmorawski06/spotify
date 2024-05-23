@@ -11,6 +11,7 @@ type RootStackParamList = {
   Search: undefined;
   Library: undefined;
   Song: undefined;
+  Test: undefined;
   // Dodaj inne ekrany tutaj
 };
 

@@ -39,12 +39,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    padding: 20,
   },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    marginTop: 20,
+    marginLeft: 20,
   },
   image: {
     width: 100,

@@ -22,7 +22,6 @@ const BottomNavigationBar: React.FC = () => {
   const [activeScreen, setActiveScreen] = useState<keyof RootStackParamList>('Home'); // Początkowo ustawiamy aktywny ekran jako 'Home'
 
   const goToScreen = (screenName: keyof RootStackParamList) => {
-    setActiveScreen(screenName); // Ustawiamy aktywny ekran na kliknięty ekran
     navigation.navigate(screenName); // Nawigujemy do klikniętego ekranu
   };
 
